@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var express_1 = require("express");
+var products_1 = require("../controllers/products");
+var isAdmin_1 = require("../middleware/isAdmin");
+var router = express_1.Router();
+router.get('/listar/:id?', products_1.productController.getProducts);
+router.post('/agregar', isAdmin_1.checkAdmin, products_1.productController.addProducts);
+router.put('/actualizar/:id', isAdmin_1.checkAdmin, products_1.productController.updateProducts);
+router.delete('/borrar/:id', isAdmin_1.checkAdmin, products_1.productController.deleteProducts);
+exports.default = router;
