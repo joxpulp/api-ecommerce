@@ -17,7 +17,7 @@ Products:
 | PUT     | /api/productos/actualizar/id | Updates a product by passing the product's id and a JSON Body, change **isAdmin** boolean in *'/middleware/isAdmin.js'* to true (authorized access) or false (unauthorized access) |
 | DELETE | /api/productos/borrar/id      |Delete a product from the product list by passing the product's id, change  **isAdmin** boolean in *'/middleware/isAdmin.js'* to true (authorized access) or false (unauthorized access)|
 
-JSON Body Example: 
+JSON Body template: 
 ```Typescript
 {
     "title": string,
