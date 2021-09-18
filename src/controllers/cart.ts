@@ -1,6 +1,6 @@
 import 'regenerator-runtime/runtime';
 import { Request, Response } from 'express';
-import { cart } from '../persistence/cartclass';
+import { cart } from '../models/cart/cartclass';
 
 class CartController {
 	async getProducts(req: Request, res: Response) {
