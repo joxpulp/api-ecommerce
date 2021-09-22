@@ -1,11 +1,24 @@
-export interface Carts {
-	id: string;
-	timestamp: number;
-	products: Array<Products>;
+import {Types} from 'mongoose'
+
+export enum Table {
+	Products = 'productos',
+	Cart = 'carrito'
 }
 
+export interface ProductsCart {
+	_id: string;
+}
+
+export interface Cart {
+	_id?: string;
+	id?: string;
+	timestamp: number;
+	products: Products[];
+	cartProducts?: any;
+}
 export interface Products {
 	_id: string;
+	id?: string;
 	title?: string;
 	description?: string;
 	code?: string;
@@ -26,6 +39,10 @@ export interface newProductI {
 export interface ProductQuery {
 	title?: string;
 	price?: number;
-	code?: string | number;
+	code?: string;
 	stock?: number;
+	priceMax?: number;
+	priceMin?: number;
+	stockMax?: number;
+	stockMin?: number;
 }

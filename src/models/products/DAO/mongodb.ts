@@ -28,7 +28,7 @@ export class ProductDAOMONGO {
 			this.uri =
 				'mongodb://josu:josu@cluster0-shard-00-00.jbg6c.mongodb.net:27017,cluster0-shard-00-01.jbg6c.mongodb.net:27017,cluster0-shard-00-02.jbg6c.mongodb.net:27017/ecommerce?replicaSet=atlas-ifxfb3-shard-0&ssl=true&authSource=admin';
 		connect(this.uri);
-		this.products = model<Products>('productos', productsSchema);
+		this.products = model<Products>('finalproductos', productsSchema);
 	}
 
 	async get(id?: string): Promise<Products[]> {
@@ -70,23 +70,16 @@ export class ProductDAOMONGO {
 		return outputDelete;
 	}
 
-	// async query(options: ProductQuery): Promise<Products[]> {
-	// 	await this.get();
-	// 	type Conditions = (aProduct: Products) => boolean;
-	// 	const query: Conditions[] = [];
+	async query(options: ProductQuery): Promise<Products[]> {
+		const query: any = {};
+		if (options.title) query.title = options.title;
 
-	// 	if (options.title)
-	// 		query.push((aProduct: Products) => aProduct.title == options.title);
+		if (options.priceMin && options.priceMax)
+			query.price = { $gte: options.priceMin, $lte: options.priceMax };
 
-	// 	if (options.price)
-	// 		query.push((aProduct: Products) => aProduct.price == options.price);
+		if (options.stockMin && options.stockMax)
+			query.stock = { $gte: options.stockMin, $lte: options.stockMax };
 
-	// 	if (options.code)
-	// 		query.push((aProduct: Products) => aProduct.code == options.code);
-
-	// 	if (options.stock)
-	// 		query.push((aProduct: Products) => aProduct.stock == options.stock);
-
-	// 	return this.products.filter((aProduct) => query.every((x) => x(aProduct)));
-	// }
+		return await this.products.find(query);
+	}
 }

@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": "8510",
+    "timestamp": 1632056465894,
+    "products": [
+      {
+        "_id": "8a0c",
+        "timestamp": 1631895712273,
+        "title": "Huevos",
+        "description": "Esto es una Huevos y es sana",
+        "code": "huevos_123",
+        "price": 150,
+        "thumbnail": "eggs.jpeg",
+        "stock": 1
+      }
+    ]
+  }
+]

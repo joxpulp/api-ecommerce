@@ -1,7 +1,7 @@
 // Update with your config settings.
 
 export default {
-	productsmysql: {
+	servermysql: {
 		client: 'mysql',
 		connection: {
 			host: '192.168.64.2',
@@ -12,9 +12,9 @@ export default {
 		migrations: { directory: __dirname + '/db/migrations' },
 		seeds: { directory: __dirname + '/db/seeds' },
 	},
-	productsqlite: {
+	sqlite: {
 		client: 'sqlite3',
-		connection: { filename: './productos' },
+		connection: { filename: './e-commerce' },
 		useNullAsDefault: true,
 		migrations: { directory: __dirname + '/db/migrations' },
 		seeds: { directory: __dirname + '/db/seeds' },

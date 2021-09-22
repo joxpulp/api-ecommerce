@@ -52,21 +52,27 @@ export class ProductDAOMEM {
 	}
 
 	query(options: ProductQuery): Products[] {
-		type Conditions = (aProduct: Products) => boolean;
+		type Conditions = (product: Products) => boolean;
 		const query: Conditions[] = [];
 
 		if (options.title)
-			query.push((aProduct: Products) => aProduct.title == options.title);
-
-		if (options.price)
-			query.push((aProduct: Products) => aProduct.price == options.price);
+			query.push((product: Products) => product.title == options.title);
 
 		if (options.code)
-			query.push((aProduct: Products) => aProduct.code == options.code);
+			query.push((product: Products) => product.code == options.code);
 
-		if (options.stock)
-			query.push((aProduct: Products) => aProduct.stock == options.stock);
+		if (options.priceMin)
+			query.push((product: Products) => product.price! >= options.priceMin!);
 
-		return this.content.filter((aProduct) => query.every((x) => x(aProduct)));
+		if (options.priceMax)
+			query.push((product: Products) => product.price! <= options.priceMax!);
+
+		if (options.stockMin)
+			query.push((product: Products) => product.stock! >= options.stockMin!);
+
+		if (options.stockMax)
+			query.push((product: Products) => product.stock! <= options.stockMax!);
+
+		return this.content.filter((product) => query.every((x) => x(product)));
 	}
 }

@@ -1,11 +1,14 @@
 import 'regenerator-runtime/runtime';
 import { Request, Response } from 'express';
 import { productsAPI } from '../apis/productsapi';
+import { ProductQuery } from '../models/interfaces';
 
 class ProductController {
 	async getProducts(req: Request, res: Response) {
 		try {
 			const { id } = req.params;
+			const { title, price, code, stock, priceMax, priceMin, stockMax, stockMin } = req.query;
+
 			if (id) {
 				const singleProduct = await productsAPI.getProducts(id);
 				if (singleProduct.length === 0) {
@@ -15,6 +18,33 @@ class ProductController {
 				}
 				return res.json({ product: singleProduct });
 			} else {
+				const query: ProductQuery = {};
+
+				if (title) {
+					let titleLow = title.toString().toLowerCase();
+					let titleFinal = titleLow.charAt(0).toUpperCase() + titleLow.slice(1)
+					query.title = titleFinal; 
+				}
+
+				if (code) query.code = code.toString();
+
+				if (priceMax) query.priceMax = Number(priceMax);
+
+				if (priceMin) query.priceMin = Number(priceMin);
+
+				if (stockMax) query.stockMax = Number(stockMax);
+
+				if (stockMin) query.stockMin = Number(stockMin);
+
+				if (Object.keys(query).length) {
+					const productQuery = await productsAPI.query(query);
+					if (productQuery.length)
+					return res.json({
+						products: productQuery,
+					});
+					return res.status(404).json({ error: 'No hay productos que hagan match con la busqueda'})
+				}
+
 				const get = await productsAPI.getProducts();
 				if (get.length === 0) {
 					return res.status(404).json({ error: 'No hay productos cargados' });

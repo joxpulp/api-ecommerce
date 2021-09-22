@@ -1,7 +1,7 @@
 import { FactoryDAO } from '../models/products/productfactory';
 import { Products, newProductI, ProductQuery } from '../models/interfaces';
 
-const tipo = 6;
+const tipo = 2;
 
 class prodAPI {
 	private products;
@@ -34,9 +34,9 @@ class prodAPI {
 		return await this.products.delete(id);
 	}
 
-	// async query(options: ProductQuery) {
-	// 	return await this.products.query(options);
-	// }
+	async query(options: ProductQuery) {
+		return await this.products.query(options);
+	}
 }
 
 export const productsAPI = new prodAPI();

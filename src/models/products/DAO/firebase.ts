@@ -1,10 +1,10 @@
 import firebase from 'firebase-admin';
 import serviceAccount from '../../../firebasekey/fir-crud-254ad-firebase-adminsdk-mqgvd-eadcca8c0d.json';
-import { newProductI, Products } from '../../interfaces';
+import { newProductI, Products, ProductQuery } from '../../interfaces';
 
 export class ProductDAOFirebase {
 	private db;
-	private query;
+	private querys;
 
 	constructor() {
 		firebase.initializeApp({
@@ -17,12 +17,12 @@ export class ProductDAOFirebase {
 		});
 
 		this.db = firebase.firestore();
-		this.query = this.db.collection('productos');
+		this.querys = this.db.collection('productos');
 	}
 
 	async get(id?: string): Promise<Products[]> {
 		if (id) {
-			const getSpecific = await this.query.doc(id).get();
+			const getSpecific = await this.querys.doc(id).get();
 			const specific = getSpecific.data();
 			const product: Products[] = [];
 			if (specific) {
@@ -31,7 +31,7 @@ export class ProductDAOFirebase {
 			}
 			return product;
 		} else {
-			const getAll = await this.query.get();
+			const getAll = await this.querys.get();
 			let docs = getAll.docs;
 			const output = docs.map((doc) => ({
 				_id: doc.id,
@@ -42,7 +42,7 @@ export class ProductDAOFirebase {
 	}
 
 	async add(body: newProductI): Promise<FirebaseFirestore.WriteResult> {
-		const doc = this.query.doc();
+		const doc = this.querys.doc();
 		return await doc.create(body);
 	}
 
@@ -50,7 +50,7 @@ export class ProductDAOFirebase {
 		const getProduct = await this.get(id);
 		const updatedProduct = [];
 		if (getProduct.length) {
-			await this.query.doc(id).update(body);
+			await this.querys.doc(id).update(body);
 			const product = await this.get(id);
 			updatedProduct.push(...product);
 			return updatedProduct;
@@ -63,10 +63,45 @@ export class ProductDAOFirebase {
 		const deletedProduct = [];
 
 		if (getProduct.length) {
-			await this.query.doc(id).delete();
+			await this.querys.doc(id).delete();
 			deletedProduct.push(...getProduct);
 			return deletedProduct;
 		}
 		return getProduct;
+	}
+
+	async query(options: ProductQuery): Promise<Products[]> {
+		const getAll = await this.querys.get();
+		let docs = getAll.docs;
+		const output = docs.map((doc) => ({
+			_id: doc.id,
+			...doc.data(),
+		}));
+		type Conditions = (Product: Products) => boolean;
+
+		const query: Conditions[] = [];
+
+		if (options.title)
+			query.push((product: Products) => product.title == options.title);
+
+		if (options.price)
+			query.push((product: Products) => product.price == options.price);
+
+		if (options.code)
+			query.push((product: Products) => product.code == options.code);
+
+		if (options.priceMin)
+			query.push((product: Products) => product.price! >= options.priceMin!);
+
+		if (options.priceMax)
+			query.push((product: Products) => product.price! <= options.priceMax!);
+
+		if (options.stockMin)
+			query.push((product: Products) => product.stock! >= options.stockMin!);
+
+		if (options.stockMax)
+			query.push((product: Products) => product.stock! <= options.stockMax!);
+
+		return output.filter((product) => query.every((x) => x(product)));
 	}
 }

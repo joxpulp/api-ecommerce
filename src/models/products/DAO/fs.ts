@@ -56,6 +56,7 @@ export class ProductDAOFS {
 				${(this.content[arrayPosition].thumbnail = data.thumbnail)}
 				${(this.content[arrayPosition].stock = data.stock)}`;
 		await fs.writeFile(filePath, JSON.stringify(this.content, null, 2));
+		// FIXME FIX THIS RETURN, WRAP THE UPDATED OBJECT INSIDE VARIABLE WITH A .PUSH
 		return arrayPosition !== -1 ? [this.content[arrayPosition]] : [];
 	}
 
@@ -73,22 +74,32 @@ export class ProductDAOFS {
 	}
 
 	async query(options: ProductQuery): Promise<Products[]> {
-		await this.get();
-		type Conditions = (aProduct: Products) => boolean;
+		const readFile = await this.get()
+		type Conditions = (Product: Products) => boolean;
+
 		const query: Conditions[] = [];
 
 		if (options.title)
-			query.push((aProduct: Products) => aProduct.title == options.title);
+			query.push((product: Products) => product.title == options.title);
 
 		if (options.price)
-			query.push((aProduct: Products) => aProduct.price == options.price);
+			query.push((product: Products) => product.price == options.price);
 
 		if (options.code)
-			query.push((aProduct: Products) => aProduct.code == options.code);
+			query.push((product: Products) => product.code == options.code);
 
-		if (options.stock)
-			query.push((aProduct: Products) => aProduct.stock == options.stock);
+		if (options.priceMin)
+			query.push((product: Products) => product.price! >= options.priceMin!);
 
-		return this.content.filter((aProduct) => query.every((x) => x(aProduct)));
+		if (options.priceMax)
+			query.push((product: Products) => product.price! <= options.priceMax!);
+
+		if (options.stockMin)
+			query.push((product: Products) => product.stock! >= options.stockMin!);
+
+		if (options.stockMax)
+			query.push((product: Products) => product.stock! <= options.stockMax!);
+
+		return readFile.filter((product) => query.every((x) => x(product)));
 	}
 }

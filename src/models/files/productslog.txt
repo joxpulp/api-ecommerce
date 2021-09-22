@@ -1,6 +1,6 @@
 [
   {
-    "id": "8a0c",
+    "_id": "8a0c",
     "timestamp": 1631895712273,
     "title": "Huevos",
     "description": "Esto es una Huevos y es sana",
@@ -8,5 +8,14 @@
     "price": 150,
     "thumbnail": "eggs.jpeg",
     "stock": 1
+  },
+  {
+    "_id": "e6e8",
+    "title": "asdasasdg",
+    "description": "sdjasdjoasjdoasdojasd",
+    "code": "tv_2020",
+    "price": 3262,
+    "thumbnail": "https://imagenes.com",
+    "stock": 78
   }
 ]
