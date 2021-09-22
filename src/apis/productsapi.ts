@@ -1,7 +1,7 @@
 import { FactoryDAO } from '../models/products/productfactory';
 import { Products, newProductI, ProductQuery } from '../models/interfaces';
 
-const tipo = 2;
+const tipo = 5;
 
 class prodAPI {
 	private products;

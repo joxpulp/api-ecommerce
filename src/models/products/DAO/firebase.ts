@@ -1,6 +1,6 @@
 import firebase from 'firebase-admin';
-import serviceAccount from '../../../firebasekey/fir-crud-254ad-firebase-adminsdk-mqgvd-eadcca8c0d.json';
 import { newProductI, Products, ProductQuery } from '../../interfaces';
+import CONFIG from '../../../config/config'
 
 export class ProductDAOFirebase {
 	private db;
@@ -9,9 +9,9 @@ export class ProductDAOFirebase {
 	constructor() {
 		firebase.initializeApp({
 			credential: firebase.credential.cert({
-				privateKey: serviceAccount.private_key,
-				clientEmail: serviceAccount.client_email,
-				projectId: serviceAccount.project_id,
+				privateKey: `${CONFIG.FIREBASE_PRIVATEKEY}`,
+				clientEmail: `${CONFIG.FIREBASE_CLIENTEMAIL}`,
+				projectId: `${CONFIG.FIREBASE_PROJECTID}`,
 			}),
 			databaseURL: 'https://fir-crud-254ad.iam.gserviceaccount.com',
 		});

@@ -1,6 +1,5 @@
 import firebase from 'firebase-admin';
-import serviceAccount from '../../../firebasekey/fir-crud-254ad-firebase-adminsdk-mqgvd-eadcca8c0d.json';
-import { newProductI, Products, Cart } from '../../interfaces';
+import { Products } from '../../interfaces';
 import { productsAPI } from '../../../apis/productsapi';
 
 export class CartDAOFirebase {

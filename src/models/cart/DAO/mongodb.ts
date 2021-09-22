@@ -1,6 +1,8 @@
 import { Schema, model, connect, Types } from 'mongoose';
 import { Products, Cart } from '../../interfaces';
 import { productsAPI } from '../../../apis/productsapi';
+import CONFIG from '../../../config/config';
+
 
 const cartSchema = new Schema<Cart>(
 	{
@@ -33,10 +35,9 @@ export class CartDAOMONGO {
 	private cartProduct;
 
 	constructor(local: boolean = true) {
-		if (local) this.uri = 'mongodb://josu:josu@127.0.0.1:27017/ecommerce';
+		if (local) this.uri = `mongodb://${CONFIG.MONGO_USER}:${CONFIG.MONGO_PASSWORD}@127.0.0.1:27017/${CONFIG.MONGO_DBNAME}`;
 		else
-			this.uri =
-				'mongodb://josu:josu@cluster0-shard-00-00.jbg6c.mongodb.net:27017,cluster0-shard-00-01.jbg6c.mongodb.net:27017,cluster0-shard-00-02.jbg6c.mongodb.net:27017/ecommerce?replicaSet=atlas-ifxfb3-shard-0&ssl=true&authSource=admin';
+			this.uri = `mongodb+srv://${CONFIG.MONGO_USER}:${CONFIG.MONGO_PASSWORD}@${CONFIG.MONGO_ATLAS_CLUSTER}/${CONFIG.MONGO_DBNAME}?retryWrites=true&w=majority`;
 		connect(this.uri);
 		this.cart = model<Cart>('carritos', cartSchema);
 		this.cartProduct = model<Products>('productoscarritos', cartProdutcsSchema);

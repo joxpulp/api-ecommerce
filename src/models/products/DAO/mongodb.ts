@@ -1,5 +1,6 @@
 import { Schema, model, connect } from 'mongoose';
 import { Products, newProductI, ProductQuery } from '../../interfaces';
+import CONFIG from '../../../config/config';
 
 const productsSchema = new Schema<Products>(
 	{
@@ -23,10 +24,9 @@ export class ProductDAOMONGO {
 	private products;
 
 	constructor(local: boolean = true) {
-		if (local) this.uri = 'mongodb://josu:josu@127.0.0.1:27017/ecommerce';
+		if (local) this.uri = `mongodb://${CONFIG.MONGO_USER}:${CONFIG.MONGO_PASSWORD}@127.0.0.1:27017/${CONFIG.MONGO_DBNAME}`;
 		else
-			this.uri =
-				'mongodb://josu:josu@cluster0-shard-00-00.jbg6c.mongodb.net:27017,cluster0-shard-00-01.jbg6c.mongodb.net:27017,cluster0-shard-00-02.jbg6c.mongodb.net:27017/ecommerce?replicaSet=atlas-ifxfb3-shard-0&ssl=true&authSource=admin';
+			this.uri = `mongodb+srv://${CONFIG.MONGO_USER}:${CONFIG.MONGO_PASSWORD}@${CONFIG.MONGO_ATLAS_CLUSTER}/${CONFIG.MONGO_DBNAME}?retryWrites=true&w=majority`;
 		connect(this.uri);
 		this.products = model<Products>('finalproductos', productsSchema);
 	}
