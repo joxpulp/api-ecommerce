@@ -1,9 +1,6 @@
 # E-commerce API 
 ## _E-commerce API using Express and Typescript_
 
-Link: [https://apiproducts.glitch.me/](https://apiproducts.glitch.me/api/productos/listar/)
-
-
 ## Scripts
 | Script        | Description                            |
 | ------------- |:--------------------------------------:|
@@ -53,9 +50,8 @@ Cart:
 | POST    |/api/carrito/agregar/id| Add a product from the product list to the cart by passing the product's id|
 | DELETE |/api/carrito/borrar/id|Delete a product from the cart by passing the product's id|
 
-Products Queries:
+## Products Queries:
 
-You can combine the queries with &
 
 | Query      | Type          | Description  |
 | ------------- |:-------------:| -----:|
@@ -66,11 +62,17 @@ You can combine the queries with &
 | stockMin |number|Filter products between stocks, stockMax is nedeed in order to work|
 | stockMax |number|Filter products between stocks, stockMin is nedeed in order to work|
 
-```
-Queries Example: 
+# Query Examples:
 Method: GET
+Route: /api/productos/listar?
 
-Example: /api/productos/listar?title=anana
-Example 2: /api/productos/listar?title=anana&priceMin=1000&priceMax=5000
-
+Example 1 (Single query paramater):
+```Typescript
+/api/productos/listar?title=anana
 ````
+
+You can combine the queries with &.
+Example 2 (Multiple query paramaters): 
+```Typescript
+/api/productos/listar?title=anana&priceMin=1000&priceMax=5000
+```
