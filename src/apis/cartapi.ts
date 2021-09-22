@@ -1,7 +1,7 @@
 import { CartFactoryDAO } from '../models/cart/cartfactory';
 import { Cart, Products } from '../models/interfaces';
 
-const tipo = 5;
+const tipo = 6;
 
 class CartAPI {
 	private cart;

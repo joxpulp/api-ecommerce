@@ -13,7 +13,7 @@ export class ProductDAOFirebase {
 				clientEmail: `${CONFIG.FIREBASE_CLIENTEMAIL}`,
 				projectId: `${CONFIG.FIREBASE_PROJECTID}`,
 			}),
-			databaseURL: 'https://fir-crud-254ad.iam.gserviceaccount.com',
+			databaseURL: `https://${CONFIG.FIREBASE_DBURL}`,
 		});
 
 		this.db = firebase.firestore();

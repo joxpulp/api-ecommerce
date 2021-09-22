@@ -13,6 +13,7 @@ const env = {
 	FIREBASE_PRIVATEKEY: process.env.FIREBASE_PRIVATEKEY || 'privatekey',
 	FIREBASE_CLIENTEMAIL: process.env.FIREBASE_CLIENTEMAIL || 'clientemail',
 	FIREBASE_PROJECTID: process.env.FIREBASE_PROJECTID || 'projectid',
+	FIREBASE_DBURL: process.env.FIREBASE_DBURL || 'dbUrl',
 };
 
-export default env
+export default env;
