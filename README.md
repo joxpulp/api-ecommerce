@@ -8,7 +8,7 @@
 | npm run dev   | Execute TS files with nodemon          | 
 | npm run start | Execute transpiled files in dist folder|
 ## DAOs
-DAOs can be changed in 'src/apis' in 'cartapi.ts' and 'productsapi.ts' files
+DAOs can be changed in `'src/apis'` in 'cartapi.ts' and 'productsapi.ts' files
 | Number        | Description                            |
 | ------------- |:--------------------------------------:|
 | 0 | Memory persistence/database           |
