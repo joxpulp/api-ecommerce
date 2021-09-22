@@ -63,16 +63,16 @@ Cart:
 | stockMax |number|Filter products between stocks, stockMin is nedeed in order to work|
 
 # Query Examples:
-Method: GET
+Method: `GET`
 
-Route: /api/productos/listar?
+Route: `/api/productos/listar?`
 
 Example 1 (Single query paramater):
 ```Typescript
 /api/productos/listar?title=anana
 ````
 
-You can combine the queries with &.
+You can combine the queries with `&`.
 
 Example 2 (Multiple query paramaters): 
 ```Typescript
