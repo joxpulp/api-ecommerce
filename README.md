@@ -25,9 +25,9 @@ Products:
 | ------------- |:-------------:| -----:|
 | GET     |*/api/productos/listar*|List all products |
 | GET     |*/api/productos/listar/id*|List a product by id, if a product doesn't exist return an error message |
-| POST    |*/api/productos/agregar*| Add a product by passing a JSON Body, change `**isAdmin**` boolean in `*'/middleware/isAdmin.js'*` to true (authorized access) or false (unauthorized access)
-| PUT     |*api/productos/actualizar/id*| Updates a product by passing the product's id and a JSON Body, change `**isAdmin**` boolean in `*'/middleware/isAdmin.js'*` to true (authorized access) or false (unauthorized access) |
-| DELETE |*/api/productos/borrar/id* |Delete a product from the product list by passing the product's id, change  `**isAdmin**` boolean in `*'/middleware/isAdmin.js'*` to true (authorized access) or false (unauthorized access)|
+| POST    |*/api/productos/agregar*| Add a product by passing a JSON Body, change **`isAdmin`** boolean in *`'/middleware/isAdmin.js'`* to true (authorized access) or false (unauthorized access)
+| PUT     |*api/productos/actualizar/id*| Updates a product by passing the product's id and a JSON Body, change **`isAdmin`** boolean in *`'/middleware/isAdmin.js'`* to true (authorized access) or false (unauthorized access) |
+| DELETE |*/api/productos/borrar/id* |Delete a product from the product list by passing the product's id, change  **`isAdmin`** boolean in *`'/middleware/isAdmin.js'`* to true (authorized access) or false (unauthorized access)|
 
 JSON Body template: 
 ```Typescript
@@ -56,11 +56,11 @@ Cart:
 | Query      | Type          | Description  |
 | ------------- |:-------------:| -----:|
 | title     |_string_|Filter products by the title|
-| priceMin     |_number_| Filter products between prices, `*priceMax*` is nedeed in order to work|
-| priceMax   |_number_| Filter products between prices, `*priceMin*` is nedeed in order to work|
+| priceMin     |_number_| Filter products between prices, *`priceMax`* is nedeed in order to work|
+| priceMax   |_number_| Filter products between prices, *`priceMin`* is nedeed in order to work|
 | code |_string_|Filters products by the code|
-| stockMin |_number_|Filter products between stocks, `*stockMax*` is nedeed in order to work|
-| stockMax |_number_|Filter products between stocks, `*stockMin*` is nedeed in order to work|
+| stockMin |_number_|Filter products between stocks, *`stockMax`* is nedeed in order to work|
+| stockMax |_number_|Filter products between stocks, *`stockMin`* is nedeed in order to work|
 
 ## Query Examples:
 Method: `GET`
