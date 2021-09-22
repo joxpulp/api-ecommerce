@@ -14,13 +14,13 @@ Link: [https://apiproducts.glitch.me/](https://apiproducts.glitch.me/api/product
 DAOs can be changed in 'src/apis' in 'cartapi.ts' and 'productsapi.ts' files
 | Number        | Description                            |
 | ------------- |:--------------------------------------:|
-| 0 | Activates Memory persistence/database           |
-| 1 | Activates Filesystem persistence/database          | 
-| 2 | Activates MySQL persistence/database|
-| 3 | Activates SQLite persistence/database|
-| 4 | Activates MongoDB Local persistence/database|
-| 5 | Activates MongoDB Atlas persistence/database|
-| 6 | Activates Firebase persistence/database|
+| 0 | Memory persistence/database           |
+| 1 | Filesystem persistence/database          | 
+| 2 | MySQL persistence/database|
+| 3 | SQLite persistence/database|
+| 4 | MongoDB Local persistence/database|
+| 5 | MongoDB Atlas persistence/database|
+| 6 | Firebase persistence/database|
 
 ## Endpoints:
 Products:
