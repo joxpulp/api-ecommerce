@@ -64,6 +64,7 @@ Cart:
 
 # Query Examples:
 Method: GET
+
 Route: /api/productos/listar?
 
 Example 1 (Single query paramater):
@@ -72,6 +73,7 @@ Example 1 (Single query paramater):
 ````
 
 You can combine the queries with &.
+
 Example 2 (Multiple query paramaters): 
 ```Typescript
 /api/productos/listar?title=anana&priceMin=1000&priceMax=5000
