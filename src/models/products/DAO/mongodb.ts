@@ -80,6 +80,8 @@ export class ProductDAOMONGO {
 		if (options.stockMin && options.stockMax)
 			query.stock = { $gte: options.stockMin, $lte: options.stockMax };
 
+		if (options.code) query.code = options.code;
+
 		return await this.products.find(query);
 	}
 }

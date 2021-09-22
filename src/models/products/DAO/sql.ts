@@ -57,6 +57,7 @@ export class ProductDAOSQL {
 						options.stockMin!,
 						options.stockMax!,
 					]);
+				if (options.code) queryBuilder.where('code', options.code);
 			}
 		);
 
