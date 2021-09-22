@@ -23,11 +23,11 @@ DAOs can be changed in 'src/apis' in 'cartapi.ts' and 'productsapi.ts' files
 Products:
 | Method       | Route          | Description  |
 | ------------- |:-------------:| -----:|
-| GET     |/api/productos/listar|List all products |
-| GET     |/api/productos/listar/id|List a product by id, if a product doesn't exist return an error message |
-| POST    |/api/productos/agregar| Add a product by passing a JSON Body, change **isAdmin** boolean in *'/middleware/isAdmin.js'* to true (authorized access) or false (unauthorized access)
-| PUT     |api/productos/actualizar/id| Updates a product by passing the product's id and a JSON Body, change **isAdmin** boolean in *'/middleware/isAdmin.js'* to true (authorized access) or false (unauthorized access) |
-| DELETE |/api/productos/borrar/id |Delete a product from the product list by passing the product's id, change  **isAdmin** boolean in *'/middleware/isAdmin.js'* to true (authorized access) or false (unauthorized access)|
+| GET     |_/api/productos/listar_|List all products |
+| GET     |_/api/productos/listar/id_|List a product by id, if a product doesn't exist return an error message |
+| POST    |_/api/productos/agregar_| Add a product by passing a JSON Body, change **isAdmin** boolean in *'/middleware/isAdmin.js'* to true (authorized access) or false (unauthorized access)
+| PUT     |_api/productos/actualizar/id_| Updates a product by passing the product's id and a JSON Body, change **isAdmin** boolean in *'/middleware/isAdmin.js'* to true (authorized access) or false (unauthorized access) |
+| DELETE |_/api/productos/borrar/id_ |Delete a product from the product list by passing the product's id, change  **isAdmin** boolean in *'/middleware/isAdmin.js'* to true (authorized access) or false (unauthorized access)|
 
 JSON Body template: 
 ```Typescript
@@ -45,34 +45,34 @@ JSON Body template:
 Cart:
 | Method       | Route          | Description  |
 | ------------- |:-------------:| -----:|
-| GET     |/api/carrito/listar|List a cart with all the products|
-| GET     |/api/carrito/listar/id|List a product from the cart by id, if a product does not exist return an error message|
-| POST    |/api/carrito/agregar/id| Add a product from the product list to the cart by passing the product's id|
-| DELETE |/api/carrito/borrar/id|Delete a product from the cart by passing the product's id|
+| GET     |_/api/carrito/listar_|List a cart with all the products|
+| GET     |_/api/carrito/listar/id_|List a product from the cart by id, if a product does not exist return an error message|
+| POST    |_/api/carrito/agregar/id_| Add a product from the product list to the cart by passing the product's id|
+| DELETE |_/api/carrito/borrar/id_|Delete a product from the cart by passing the product's id|
 
 ## Products Queries:
 
 
 | Query      | Type          | Description  |
 | ------------- |:-------------:| -----:|
-| title     |string|Filter products by the title|
-| priceMin     |number| Filter products between prices, priceMax is nedeed in order to work|
-| priceMax   |number| Filter products between prices, priceMin is nedeed in order to work|
-| code |string|Filters products by the code|
-| stockMin |number|Filter products between stocks, stockMax is nedeed in order to work|
-| stockMax |number|Filter products between stocks, stockMin is nedeed in order to work|
+| title     |_string_|Filter products by the title|
+| priceMin     |_number_| Filter products between prices, priceMax is nedeed in order to work|
+| priceMax   |_number_| Filter products between prices, priceMin is nedeed in order to work|
+| code |_string_|Filters products by the code|
+| stockMin |_number_|Filter products between stocks, stockMax is nedeed in order to work|
+| stockMax |_number_|Filter products between stocks, stockMin is nedeed in order to work|
 
-# Query Examples:
+## Query Examples:
 Method: `GET`
 
-Route: `/api/productos/listar?`
+Route: _`/api/productos/listar?`_
 
 Example 1 (Single query paramater):
 ```Typescript
 /api/productos/listar?title=anana
 ````
 
-You can combine the queries with `&`.
+Queries can be combined with `&`.
 
 Example 2 (Multiple query paramaters): 
 ```Typescript
