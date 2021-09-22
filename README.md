@@ -1,5 +1,5 @@
 # E-commerce API 
-## _E-commerce API using Express and Typescript_
+## *E-commerce API using Express and Typescript*
 
 ## Scripts
 | Script        | Description                            |
