@@ -9,9 +9,9 @@ export class ProductDAOFirebase {
 	constructor() {
 		firebase.initializeApp({
 			credential: firebase.credential.cert({
-				privateKey: `${CONFIG.FIREBASE_PRIVATEKEY}`,
-				clientEmail: `${CONFIG.FIREBASE_CLIENTEMAIL}`,
-				projectId: `${CONFIG.FIREBASE_PROJECTID}`,
+				privateKey: CONFIG.FIREBASE_PRIVATEKEY,
+				clientEmail: CONFIG.FIREBASE_CLIENTEMAIL,
+				projectId: CONFIG.FIREBASE_PROJECTID,
 			}),
 			databaseURL: `https://${CONFIG.FIREBASE_DBURL}`,
 		});
