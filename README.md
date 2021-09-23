@@ -1,7 +1,7 @@
 # E-commerce API 
 ## *E-commerce API using Express and Typescript*
 
-Link using MONGO ATLAS: [https://finalproyectcoder.herokuapp.com/](https://finalproyectcoder.herokuapp.com/)
+Link (MONGO ATLAS PERSISTENCE): [https://finalproyectcoder.herokuapp.com/](https://finalproyectcoder.herokuapp.com/)
 ## Scripts
 | Script        | Description                            |
 | ------------- |:--------------------------------------:|
