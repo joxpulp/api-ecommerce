@@ -3,12 +3,27 @@ import { Products } from '../../interfaces';
 import { productsAPI } from '../../../apis/productsapi';
 
 export class CartDAOFirebase {
+	// Private instance of the class to use singleton pattern
+	private static _instance: CartDAOFirebase;
 	private db;
 	private query;
 
 	constructor() {
 		this.db = firebase.firestore();
 		this.query = this.db.collection('carrito');
+	}
+
+	// Getter to call the instance with singleton pattern.
+	public static get instance() {
+		if (this._instance) {
+			console.log(
+				'La instancia FIREBASE CART ya fue inicializada, se retorna la instancia ya inicializada'
+			);
+			return this._instance;
+		} else {
+			console.log('Intancia FIREBASE CART inicializada por primera vez');
+			return (this._instance = new this());
+		}
 	}
 
 	async get(id?: string): Promise<Products[]> {

@@ -3,7 +3,6 @@ import { Products, Cart } from '../../interfaces';
 import { productsAPI } from '../../../apis/productsapi';
 import CONFIG from '../../../config/config';
 
-
 const cartSchema = new Schema<Cart>(
 	{
 		timestamp: { type: Number, default: Date.now() },
@@ -30,17 +29,47 @@ const cartProdutcsSchema = new Schema<Products>(
 );
 
 export class CartDAOMONGO {
+	// Private instance of the class to use singleton pattern
+	private static _instanceLocal: CartDAOMONGO;
+	private static _instanceAtlas: CartDAOMONGO;
 	private uri: string;
 	private cart;
 	private cartProduct;
 
 	constructor(local: boolean = true) {
-		if (local) this.uri = `mongodb://${CONFIG.MONGO_USER}:${CONFIG.MONGO_PASSWORD}@127.0.0.1:27017/${CONFIG.MONGO_DBNAME}`;
+		if (local)
+			this.uri = `mongodb://${CONFIG.MONGO_USER}:${CONFIG.MONGO_PASSWORD}@127.0.0.1:27017/${CONFIG.MONGO_DBNAME}`;
 		else
 			this.uri = `mongodb+srv://${CONFIG.MONGO_USER}:${CONFIG.MONGO_PASSWORD}@${CONFIG.MONGO_ATLAS_CLUSTER}/${CONFIG.MONGO_DBNAME}?retryWrites=true&w=majority`;
 		connect(this.uri);
 		this.cart = model<Cart>('carritos', cartSchema);
 		this.cartProduct = model<Products>('productoscarritos', cartProdutcsSchema);
+	}
+
+	// Getter to call the instance with singleton pattern.
+	public static get instanceLocal() {
+		if (this._instanceLocal) {
+			console.log(
+				'La instancia MONGODB LOCAL CART ya fue inicializada, se retorna la misma instancia que ya fue inicializada'
+			);
+			return this._instanceLocal;
+		} else {
+			console.log('Intancia MONGODB LOCAL CART inicializada por primera vez');
+			return (this._instanceLocal = new this());
+		}
+	}
+
+	// Getter to call the instance with singleton pattern.
+	public static get instanceAtlas() {
+		if (this._instanceAtlas) {
+			console.log(
+				'La instancia MONGODB ATLAS CART ya fue inicializada, se retorna la misma instancia que ya fue inicializada'
+			);
+			return this._instanceAtlas;
+		} else {
+			console.log('Intancia MONGODB ATLAS CART inicializada por primera vez');
+			return (this._instanceAtlas = new this(false));
+		}
 	}
 
 	async get(id?: string): Promise<Cart[] | Products[]> {

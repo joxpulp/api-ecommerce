@@ -20,15 +20,45 @@ const productsSchema = new Schema<Products>(
 );
 
 export class ProductDAOMONGO {
+	// Private instance of the class to use singleton pattern
+	private static _instanceLocal: ProductDAOMONGO;
+	private static _instanceAtlas: ProductDAOMONGO;
 	private uri: string;
 	private products;
 
 	constructor(local: boolean = true) {
-		if (local) this.uri = `mongodb://${CONFIG.MONGO_USER}:${CONFIG.MONGO_PASSWORD}@127.0.0.1:27017/${CONFIG.MONGO_DBNAME}`;
+		if (local)
+			this.uri = `mongodb://${CONFIG.MONGO_USER}:${CONFIG.MONGO_PASSWORD}@127.0.0.1:27017/${CONFIG.MONGO_DBNAME}`;
 		else
 			this.uri = `mongodb+srv://${CONFIG.MONGO_USER}:${CONFIG.MONGO_PASSWORD}@${CONFIG.MONGO_ATLAS_CLUSTER}/${CONFIG.MONGO_DBNAME}?retryWrites=true&w=majority`;
 		connect(this.uri);
 		this.products = model<Products>('finalproductos', productsSchema);
+	}
+
+	// Getter to call the instance with singleton pattern.
+	public static get instanceLocal() {
+		if (this._instanceLocal) {
+			console.log(
+				'La instancia MONGODB LOCAL PRODUCT ya fue inicializada, se retorna la misma instancia que ya fue inicializada'
+			);
+			return this._instanceLocal;
+		} else {
+			console.log('Intancia MONGODB LOCAL PRODUCT inicializada por primera vez');
+			return (this._instanceLocal = new this());
+		}
+	}
+
+	// Getter to call the instance with singleton pattern.
+	public static get instanceAtlas() {
+		if (this._instanceAtlas) {
+			console.log(
+				'La instancia MONGODB ATLAS PRODUCT ya fue inicializada, se retorna la misma instancia que ya fue inicializada'
+			);
+			return this._instanceAtlas;
+		} else {
+			console.log('Intancia MONGODB ATLAS PRODUCT inicializada por primera vez');
+			return (this._instanceAtlas = new this(false));
+		}
 	}
 
 	async get(id?: string): Promise<Products[]> {

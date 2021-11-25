@@ -5,10 +5,25 @@ import { Products, newProductI, ProductQuery } from '../../interfaces';
 const filePath = path.resolve(__dirname, '../../files/productslog.txt');
 
 export class ProductDAOFS {
+	// Private instance of the class to use singleton pattern
+	private static _instance: ProductDAOFS;
 	private content: Array<Products>;
 
 	constructor() {
 		this.content = [];
+	}
+
+	// Getter to call the instance with singleton pattern.
+	public static get instance() {
+		if (this._instance) {
+			console.log(
+				'La instancia FS PRODUCT ya fue inicializada, se retorna la instancia ya inicializada'
+			);
+			return this._instance;
+		} else {
+			console.log('Intancia FS PRODUCT inicializada por primera vez');
+			return (this._instance = new this());
+		}
 	}
 
 	randomId(): string {
@@ -74,7 +89,7 @@ export class ProductDAOFS {
 	}
 
 	async query(options: ProductQuery): Promise<Products[]> {
-		const readFile = await this.get()
+		const readFile = await this.get();
 		type Conditions = (Product: Products) => boolean;
 
 		const query: Conditions[] = [];

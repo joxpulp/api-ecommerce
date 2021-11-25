@@ -6,6 +6,8 @@ const filePath = path.resolve(__dirname, '../../files/productslog.txt');
 const filePathCart = path.resolve(__dirname, '../../files/cartlog.txt');
 
 export class CartDAOFS {
+	// Private instance of the class to use singleton pattern
+	private static _instance: CartDAOFS;
 	content: Cart[];
 
 	constructor() {
@@ -16,6 +18,19 @@ export class CartDAOFS {
 				products: [],
 			},
 		];
+	}
+
+	// Getter to call the instance with singleton pattern.
+	public static get instance() {
+		if (this._instance) {
+			console.log(
+				'La instancia FS CART ya fue inicializada, se retorna la misma instancia que ya fue inicializada'
+			);
+			return this._instance;
+		} else {
+			console.log('Intancia FS CART inicializada por primera vez');
+			return (this._instance = new this());
+		}
 	}
 
 	randomId(): string {
@@ -90,5 +105,4 @@ export class CartDAOFS {
 		// Return the deleted product if the product exist else return []
 		return arrayPosition === -1 ? [] : deletedProduct;
 	}
-
 }

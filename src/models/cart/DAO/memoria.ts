@@ -1,6 +1,8 @@
 import { Cart, Products } from '../../interfaces';
 import { productsAPI } from '../../../apis/productsapi';
 export class CartDAOMEM {
+	// Private instance of the class to use singleton pattern
+	private static _instance: CartDAOMEM;
 	content: Cart[];
 
 	constructor() {
@@ -11,6 +13,19 @@ export class CartDAOMEM {
 				products: [],
 			},
 		];
+	}
+
+	// Getter to call the instance with singleton pattern.
+	public static get instance() {
+		if (this._instance) {
+			console.log(
+				'La instancia MEMORIA CART ya fue inicializada, se retorna la misma instancia que ya fue inicializada'
+			);
+			return this._instance;
+		} else {
+			console.log('Intancia MEMORIA CART inicializada por primera vez');
+			return (this._instance = new this());
+		}
 	}
 
 	randomId(): string {
@@ -48,7 +63,9 @@ export class CartDAOMEM {
 			.indexOf(id);
 
 		// Filtering the deleted product into a new Array
-		const deletedProduct = this.content[0].products.filter((product) => product._id == id);
+		const deletedProduct = this.content[0].products.filter(
+			(product) => product._id == id
+		);
 
 		// If the product exists, remove the product from the cart's products array
 		arrayPosition !== -1 && this.content[0].products.splice(arrayPosition, 1);

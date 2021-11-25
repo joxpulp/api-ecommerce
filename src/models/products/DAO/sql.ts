@@ -3,11 +3,40 @@ import dbConfig from '../../../knexfile';
 import { Products, newProductI, Table, ProductQuery } from '../../interfaces';
 
 export class ProductDAOSQL {
+	// Private instance of the class to use singleton pattern
+	private static _instanceMYSQL: ProductDAOSQL;
+	private static _instanceSQLITE: ProductDAOSQL;
 	connection: Knex;
 
 	constructor(mysql: boolean = true) {
 		const options = mysql ? dbConfig['servermysql'] : dbConfig['sqlite'];
 		this.connection = knex(options);
+	}
+
+	// Getter to call the instance with singleton pattern.
+	public static get instanceMYSQL() {
+		if (this._instanceMYSQL) {
+			console.log(
+				'La instancia MYSQL PRODUCT ya fue inicializada, se retorna la misma instancia que ya fue inicializada'
+			);
+			return this._instanceMYSQL;
+		} else {
+			console.log('Intancia MYSQL PRODUCT inicializada por primera vez');
+			return (this._instanceMYSQL = new this());
+		}
+	}
+
+	// Getter to call the instance with singleton pattern.
+	public static get instanceSQLITE() {
+		if (this._instanceSQLITE) {
+			console.log(
+				'La instancia SQLITE PRODUCT ya fue inicializada, se retorna la misma instancia que ya fue inicializada'
+			);
+			return this._instanceSQLITE;
+		} else {
+			console.log('Intancia SQLITE PRODUCT inicializada por primera vez');
+			return (this._instanceSQLITE = new this(false));
+		}
 	}
 
 	async get(id?: string): Promise<Products[]> {

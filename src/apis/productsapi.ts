@@ -1,13 +1,12 @@
 import { FactoryDAO } from '../models/products/productfactory';
 import { Products, newProductI, ProductQuery } from '../models/interfaces';
-
-const tipo = 6;
+import { flags } from '../config/config';
 
 class prodAPI {
 	private products;
 
 	constructor() {
-		this.products = FactoryDAO.get(tipo);
+		this.products = FactoryDAO.get(flags.D);
 	}
 
 	async getProducts(id?: string): Promise<Products[]> {

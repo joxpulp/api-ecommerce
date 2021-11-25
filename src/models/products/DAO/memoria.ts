@@ -1,10 +1,25 @@
 import { Products, newProductI, ProductQuery } from '../../interfaces';
 
 export class ProductDAOMEM {
+	// Private instance of the class to use singleton pattern
+	private static _instance: ProductDAOMEM;
 	private content: Products[];
 
 	constructor() {
 		this.content = [];
+	}
+
+	// Getter to call the instance with singleton pattern.
+	public static get instance() {
+		if (this._instance) {
+			console.log(
+				'La instancia MEMORIA PRODUCT ya fue inicializada, se retorna la misma instancia que ya fue inicializada'
+			);
+			return this._instance;
+		} else {
+			console.log('Intancia MEMORIA PRODUCT inicializada por primera vez');
+			return (this._instance = new this());
+		}
 	}
 
 	randomId(): string {

@@ -1,43 +1,36 @@
-import { CartDAOMEM } from "./DAO/memoria";
-import { CartDAOFS } from "./DAO/fs";
-import { CartDAOSQL } from "./DAO/sql";
-import { CartDAOMONGO } from "./DAO/mongodb";
-import { CartDAOFirebase } from "./DAO/firebase";
+import { CartDAOMEM } from './DAO/memoria';
+import { CartDAOFS } from './DAO/fs';
+import { CartDAOSQL } from './DAO/sql';
+import { CartDAOMONGO } from './DAO/mongodb';
+import { CartDAOFirebase } from './DAO/firebase';
 
 export class CartFactoryDAO {
-	static get(tipo: number) {
+	static get(tipo: string) {
 		switch (tipo) {
-			case 0:
-				console.log('RETORNANDO CART INSTANCIA DE MEMORIA');
-				return new CartDAOMEM();
+			case 'MEMORIA':
+				CartDAOMEM.instance;
+				return CartDAOMEM.instance;
 
-			case 1:
-				console.log('RETORNANDO CART INSTANCIA CLASE FS');
-				return new CartDAOFS();
+			case 'FS':
+				return CartDAOFS.instance;
 
-			case 2:
-				console.log('RETORNANDO INSTANCIA CLASE MYSQL');
-				return new CartDAOSQL(true);
+			case 'MYSQL':
+				return CartDAOSQL.instanceMYSQL;
 
-			case 3:
-				console.log('RETORNANDO INSTANCIA CLASE SQLITE');
-				return new CartDAOSQL(false);
+			case 'SQLITE':
+				return CartDAOSQL.instanceSQLITE;
 
-			case 4:
-				console.log('RETORNANDO INSTANCIA CLASE MONGO LOCAL');
-				return new CartDAOMONGO(true);
+			case 'MONGOLOCAL':
+				return CartDAOMONGO.instanceLocal;
 
-			case 5:
-				console.log('RETORNANDO INSTANCIA CLASE MONGO ATLAS');
-				return new CartDAOMONGO(false);
+			case 'MONGOATLAS':
+				return CartDAOMONGO.instanceAtlas;
 
-			case 6:
-				console.log('RETORNANDO INSTANCIA CLASE FIREBASE');
-				return new CartDAOFirebase();
+			case 'FIREBASE':
+				return CartDAOFirebase.instance;
 
 			default:
-				console.log('RETORNANDO INSTANCIA CLASE MEMORIA');
-				return new CartDAOMEM();
+				return CartDAOMEM.instance;
 		}
 	}
 }

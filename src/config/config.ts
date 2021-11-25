@@ -1,4 +1,8 @@
 import dotenv from 'dotenv';
+import args from 'args';
+
+args.option('DAO', 'Sets the DB to use')
+export const flags = args.parse(process.argv);
 
 dotenv.config();
 

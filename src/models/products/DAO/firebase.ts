@@ -1,8 +1,10 @@
 import firebase from 'firebase-admin';
 import { newProductI, Products, ProductQuery } from '../../interfaces';
-import CONFIG from '../../../config/config'
+import CONFIG from '../../../config/config';
 
 export class ProductDAOFirebase {
+	// Private instance of the class to use singleton pattern
+	private static _instance: ProductDAOFirebase;
 	private db;
 	private querys;
 
@@ -18,6 +20,19 @@ export class ProductDAOFirebase {
 
 		this.db = firebase.firestore();
 		this.querys = this.db.collection('productos');
+	}
+
+	// Getter to call the instance with singleton pattern.
+	public static get instance() {
+		if (this._instance) {
+			console.log(
+				'La instancia FIREBASE PRODUCT ya fue inicializada, se retorna la instancia ya inicializada'
+			);
+			return this._instance;
+		} else {
+			console.log('Intancia FIREBASE PRODUCT inicializada por primera vez');
+			return (this._instance = new this());
+		}
 	}
 
 	async get(id?: string): Promise<Products[]> {

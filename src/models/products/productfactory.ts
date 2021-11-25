@@ -5,39 +5,32 @@ import { ProductDAOMONGO } from './DAO/mongodb';
 import { ProductDAOFirebase } from './DAO/firebase';
 
 export class FactoryDAO {
-	static get(tipo: number) {
+	static get(tipo: string) {
 		switch (tipo) {
-			case 0:
-				console.log('RETORNANDO PRODUCTS INSTANCIA DE MEMORIA');
-				return new ProductDAOMEM();
+			case 'MEMORIA':
+				ProductDAOMEM.instance;
+				return ProductDAOMEM.instance;
 
-			case 1:
-				console.log('RETORNANDO PRODUCTS INSTANCIA CLASE FS');
-				return new ProductDAOFS();
+			case 'FS':
+				return ProductDAOFS.instance;
 
-			case 2:
-				console.log('RETORNANDO PRODUCTS INSTANCIA CLASE MYSQL');
-				return new ProductDAOSQL(true);
+			case 'MYSQL':
+				return ProductDAOSQL.instanceMYSQL;
 
-			case 3:
-				console.log('RETORNANDO PRODUCTS INSTANCIA CLASE SQLITE');
-				return new ProductDAOSQL(false);
+			case 'SQLITE':
+				return ProductDAOSQL.instanceSQLITE;
 
-			case 4:
-				console.log('RETORNANDO PRODUCTS INSTANCIA CLASE MONGO LOCAL');
-				return new ProductDAOMONGO(true);
+			case 'MONGOLOCAL':
+				return ProductDAOMONGO.instanceLocal;
 
-			case 5:
-				console.log('RETORNANDO PRODUCTS INSTANCIA CLASE MONGO ATLAS');
-				return new ProductDAOMONGO(false);
+			case 'MONGOATLAS':
+				return ProductDAOMONGO.instanceAtlas;
 
-			case 6:
-				console.log('RETORNANDO PRODUCTS INSTANCIA CLASE FIREBASE');
-			return new ProductDAOFirebase();
+			case 'FIREBASE':
+			return ProductDAOFirebase.instance;
 
 			default:
-				console.log('RETORNANDO PRODUCTS INSTANCIA CLASE MEMORIA');
-				return new ProductDAOMEM();
+				return ProductDAOMEM.instance;
 		}
 	}
 }
