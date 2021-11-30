@@ -1,4 +1,5 @@
 import { Products, newProductI, ProductQuery } from '../../interfaces';
+import ProductsDTO from '../DTO/products';
 
 export class ProductDAOMEM {
 	// Private instance of the class to use singleton pattern
@@ -22,28 +23,21 @@ export class ProductDAOMEM {
 		}
 	}
 
-	randomId(): string {
-		return Math.floor((1 + Math.random()) * 0x10000)
-			.toString(16)
-			.substring(1);
-	}
-
 	finIndex(id: string): number {
-		return this.content.map((product) => product._id).indexOf(id);
+		return this.content.map((product) => product.id).indexOf(id);
 	}
 
 	get(id?: string): Products[] {
 		return id
-			? this.content.filter((product) => product._id === id)
+			? this.content.filter((product) => product.id === id)
 			: this.content;
 	}
 
 	add(data: newProductI): Products {
 		const newProduct: Products = {
-			_id: this.randomId(),
 			...data,
 		};
-		this.content.push(newProduct);
+		this.content.push(new ProductsDTO(newProduct));
 		return newProduct;
 	}
 
@@ -61,7 +55,9 @@ export class ProductDAOMEM {
 
 	delete(id: string): Products[] {
 		const arrayPosition = this.finIndex(id);
-		const deletedProduct = this.content.filter((product) => product._id == id);
+		const deletedProduct = this.content.filter(
+			(product) => product.id == id
+		);
 		arrayPosition !== -1 && this.content.splice(arrayPosition, 1);
 		return arrayPosition !== -1 ? deletedProduct : [];
 	}

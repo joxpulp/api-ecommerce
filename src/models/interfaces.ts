@@ -1,6 +1,19 @@
+export interface IReadMem<T> {
+	find(item: T): T[];
+}
+export interface IWriteMem<T> {
+	add(item: T): T;
+}
+export interface IRead<T> {
+	find(item: T): Promise<Messages[]>;
+}
+export interface IWrite<T> {
+	add(item: T): Promise<Messages>;
+}
+
 export enum Table {
 	Products = 'productos',
-	Cart = 'carrito'
+	Cart = 'carrito',
 }
 
 export interface ProductsCart {
@@ -15,7 +28,7 @@ export interface Cart {
 	cartProducts?: any;
 }
 export interface Products {
-	_id: string;
+	_id?: string;
 	id?: string;
 	title?: string;
 	description?: string;
@@ -43,4 +56,11 @@ export interface ProductQuery {
 	priceMin?: number;
 	stockMax?: number;
 	stockMin?: number;
+}
+
+export interface Messages {
+	id?: string;
+	_id?: string;
+	email: string;
+	message: string;
 }
