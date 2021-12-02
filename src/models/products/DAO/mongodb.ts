@@ -1,6 +1,6 @@
 import { Schema, model, connect } from 'mongoose';
 import { Products, newProductI, ProductQuery } from '../../interfaces';
-import CONFIG from '../../../config/config';
+import { CONFIG } from '../../../config/config';
 
 const productsSchema = new Schema<Products>(
 	{
@@ -43,7 +43,9 @@ export class ProductDAOMONGO {
 			);
 			return this._instanceLocal;
 		} else {
-			console.log('Intancia MONGODB LOCAL PRODUCT inicializada por primera vez');
+			console.log(
+				'Intancia MONGODB LOCAL PRODUCT inicializada por primera vez'
+			);
 			return (this._instanceLocal = new this());
 		}
 	}
@@ -56,7 +58,9 @@ export class ProductDAOMONGO {
 			);
 			return this._instanceAtlas;
 		} else {
-			console.log('Intancia MONGODB ATLAS PRODUCT inicializada por primera vez');
+			console.log(
+				'Intancia MONGODB ATLAS PRODUCT inicializada por primera vez'
+			);
 			return (this._instanceAtlas = new this(false));
 		}
 	}

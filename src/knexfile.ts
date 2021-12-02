@@ -1,6 +1,6 @@
 // Update with your config settings.
 
-import CONFIG from './config/config'
+import { CONFIG } from './config/config';
 
 export default {
 	servermysql: {

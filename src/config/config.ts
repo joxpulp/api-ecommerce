@@ -1,12 +1,15 @@
 import dotenv from 'dotenv';
 import args from 'args';
+import path from 'path';
 
-args.option('DAO', 'Sets the DB to use')
+args.option('PORT', 'SETS THE PORT USING CLI', 8080)
 export const flags = args.parse(process.argv);
 
-dotenv.config();
+dotenv.config({
+	path: path.resolve(__dirname, '../../' + process.env.NODE_ENV + '.env')
+});
 
-const env = {
+export const CONFIG = {
 	MYSQL_HOST: process.env.MYSQL_HOST || 'urlhost',
 	MYSQL_USER: process.env.MYSQL_USER || 'user',
 	MYSQL_PASSWORD: process.env.MYSQL_PASSWORD || 'password',
@@ -18,6 +21,6 @@ const env = {
 	FIREBASE_CLIENTEMAIL: process.env.FIREBASE_CLIENTEMAIL || 'clientemail',
 	FIREBASE_PROJECTID: process.env.FIREBASE_PROJECTID || 'projectid',
 	FIREBASE_DBURL: process.env.FIREBASE_DBURL || 'dbUrl',
+	DAO: process.env.DAO || 'ANYTHING',
 };
 
-export default env;

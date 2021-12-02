@@ -1,6 +1,6 @@
 import firebase from 'firebase-admin';
 import { newProductI, Products, ProductQuery } from '../../interfaces';
-import CONFIG from '../../../config/config';
+import { CONFIG } from '../../../config/config';
 
 export class ProductDAOFirebase {
 	// Private instance of the class to use singleton pattern

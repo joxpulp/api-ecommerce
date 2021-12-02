@@ -1,4 +1,4 @@
-import { flags } from '../config/config';
+import { CONFIG, flags } from '../config/config';
 import { CartFactoryDAO } from '../models/cart/cartfactory';
 import { Cart, Products } from '../models/interfaces';
 
@@ -6,7 +6,7 @@ class CartAPI {
 	private cart;
 
 	constructor() {
-		this.cart = CartFactoryDAO.get(flags.D);
+		this.cart = CartFactoryDAO.get(CONFIG.DAO);
 	}
 
 	async getProducts(id?: string): Promise<Cart[] | Products[]> {

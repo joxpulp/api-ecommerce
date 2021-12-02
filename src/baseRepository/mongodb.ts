@@ -1,6 +1,6 @@
 import { Schema, model, connect } from 'mongoose';
 import { IRead, IWrite, Messages } from '../models/interfaces';
-import CONFIG from '../config/config';
+import { CONFIG } from '../config/config';
 
 const messagesCollection = 'mensajes';
 
@@ -27,7 +27,7 @@ export abstract class BaseMongo<T> implements IRead<T>, IWrite<T> {
 	async find(): Promise<Messages[]> {
 		let outputGet: Messages[] = [];
 		const product = await this.messages.find();
-        outputGet.push(...product)
+		outputGet.push(...product);
 		return outputGet;
 	}
 

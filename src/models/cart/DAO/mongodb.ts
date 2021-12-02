@@ -1,7 +1,7 @@
 import { Schema, model, connect, Types } from 'mongoose';
 import { Products, Cart } from '../../interfaces';
 import { productsAPI } from '../../../apis/productsapi';
-import CONFIG from '../../../config/config';
+import { CONFIG } from '../../../config/config';
 
 const cartSchema = new Schema<Cart>(
 	{

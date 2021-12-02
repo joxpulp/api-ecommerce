@@ -1,12 +1,12 @@
 import { Messages } from '../models/interfaces';
-import { flags } from '../config/config';
+import { CONFIG, flags } from '../config/config';
 import { MessagesFactoryDAO } from '../models/messages/messagesFactory';
 
 class messagesAPI {
 	private messages;
 
 	constructor() {
-		this.messages = MessagesFactoryDAO.get(flags.D);
+		this.messages = MessagesFactoryDAO.get(CONFIG.DAO);
 	}
 
 	async getMessages(): Promise<Messages[]> {
